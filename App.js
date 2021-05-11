@@ -38,7 +38,7 @@ export default function App() {
                   <Card containerStyle={{maxWidth: 300}}>
                     <Card.Title> {eachRestaurant.name}</Card.Title>
                     <Card.Divider />
-                    <Card.Image
+                    <Card.Image     
                       source={{
                         uri: eachRestaurant.photoUrl,
                       }}
