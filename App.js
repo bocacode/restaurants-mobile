@@ -1,18 +1,8 @@
-import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect } from 'react'
 import { TextInput } from 'react-native'
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  Image,
-  Button,
-  ImageBackground,
-  ScrollView,
-} from 'react-native'
-import { Card } from 'react-native-elements'
+import { SafeAreaView, StyleSheet, ImageBackground, ScrollView } from 'react-native'
+import { Text } from 'react-native-elements'
+import SingleRestaurant from './components/SingleRestaurant'
 
 export default function App() {
   // console.log('this is the platform', Platform.OS == 'ios' ? true : false)
@@ -30,39 +20,11 @@ export default function App() {
   return (
     <ImageBackground source={require('./assets/bk.jpg')} style={{ display: 'flex', height: '100%' }}>
       <SafeAreaView style={styles.container}>
+        <Text h2> Boca Code Restaurants</Text>
         <ScrollView horizontal={true}>
           {restaurants &&
             restaurants.map(eachRestaurant => {
-              return (
-                <View>
-                  <Card containerStyle={{maxWidth: 300}}>
-                    <Card.Title> {eachRestaurant.name}</Card.Title>
-                    <Card.Divider />
-                    <Card.Image     
-                      source={{
-                        uri: eachRestaurant.photoUrl,
-                      }}
-                    >
-                      <Text style={styles.containerHeading}>{eachRestaurant.address}</Text>
-                      <Button
-                        buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                        title='VIEW NOW'
-                      />
-                    </Card.Image>
-                  </Card>
-
-                  {/* <Image
-                    style={styles.containerImg}
-                    source={{
-                      uri: eachRestaurant.photoUrl,
-                    }}
-                    // source={require('./assets/bclogo.png')}
-                  />
-                  <Text style={styles.containerHeading}>{eachRestaurant.name}</Text>
-                  <Text style={styles.containerText}>{eachRestaurant.address}</Text>
-                  <Button title='get me data' onPress={() => console.log('button pressed here')} /> */}
-                </View>
-              )
+              return <SingleRestaurant key={eachRestaurant.id} eachRestaurant={eachRestaurant} />
             })}
         </ScrollView>
         <TextInput style={styles.inputFields} placeholder='Restaurant Name' />
