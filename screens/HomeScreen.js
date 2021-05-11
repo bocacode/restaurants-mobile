@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, ActivityIndicator } from 'react-native'
-import { Button, Text } from 'react-native-elements'
+import { SafeAreaView, ScrollView, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native'
+import { Text } from 'react-native-elements'
 import SingleRestaurant from '../components/SingleRestaurant'
 
 function HomeScreen({ navigation }) {
@@ -15,14 +15,18 @@ function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Text h2> Boca Code Restaurants</Text>
-
-      <Button title='Res Details' onPress={() => navigation.navigate('ResDetails')} />
       <ScrollView>
         {!restaurants ? (
           <ActivityIndicator size='large' />
         ) : (
           restaurants.map(eachRestaurant => {
-            return <SingleRestaurant key={eachRestaurant.id} eachRestaurant={eachRestaurant} />
+            return (
+              <TouchableOpacity key={eachRestaurant.id}
+                onPress={() => navigation.navigate('ResDetails', { restaurant: eachRestaurant })}
+              >
+                <SingleRestaurant key={eachRestaurant.id} eachRestaurant={eachRestaurant} />
+              </TouchableOpacity>
+            )
           })
         )}
       </ScrollView>
