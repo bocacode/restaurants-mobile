@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { SafeAreaView, Image, View, Alert } from 'react-native'
-import { Rating, Text, Button } from 'react-native-elements'
+import { Card, Rating, Text, Button } from 'react-native-elements'
 
 function ResDetailScreen(props) {
   const { restaurant } = props.route.params
@@ -16,9 +16,7 @@ function ResDetailScreen(props) {
       body: JSON.stringify({ rating: rating }),
     })
       .then(response => response.json())
-      .then(() => {
-        props.navigation.navigate('Home')
-      })
+      .then(() => props.navigation.navigate('Home'))
       .catch(err => Alert.alert(err))
   }
 
@@ -29,10 +27,10 @@ function ResDetailScreen(props) {
         <Text h3> {restaurant.name}</Text>
         <Text style={{ marginLeft: 20 }}> {restaurant.address}</Text>
       </View>
-
-      <Rating showRating ratingCounting="{5}" onFinishRating={(rating) => setRating(rating)} />
-
-      <Button onPress={() => sendRating()} title='Send Rating' style={{ width: 200, alignSelf: 'center' }} />
+      <Card>
+        <Rating style={{marginVertical: 25 }} showRating ratingCounting="{5}" onFinishRating={(rating) => setRating(rating)} />
+      <Button  onPress={() => sendRating()} title='Send Rating' style={{ width: 200, alignSelf: 'center' }} />
+      </Card>
     </SafeAreaView>
   )
 }
