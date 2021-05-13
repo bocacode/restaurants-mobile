@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { SafeAreaView, Image, View, Alert } from 'react-native'
-import { Input, Text, Button } from 'react-native-elements'
+import { Card, Rating, Text, Button } from 'react-native-elements'
 
 function ResDetailScreen(props) {
   const { restaurant } = props.route.params
@@ -27,14 +27,10 @@ function ResDetailScreen(props) {
         <Text h3> {restaurant.name}</Text>
         <Text style={{ marginLeft: 20 }}> {restaurant.address}</Text>
       </View>
-
-      <Input
-        placeholder='Rate here'
-        style={{ width: 200, height: 60 }}
-        keyboardType='numeric'
-        onChangeText={e => setRating(e)}
-      />
-      <Button onPress={() => sendRating()} title='Send Rating' style={{ width: 200, alignSelf: 'center' }} />
+      <Card>
+        <Rating style={{marginVertical: 25 }} showRating ratingCounting="{5}" onFinishRating={(rating) => setRating(rating)} />
+      <Button  onPress={() => sendRating()} title='Send Rating' style={{ width: 200, alignSelf: 'center' }} />
+      </Card>
     </SafeAreaView>
   )
 }
